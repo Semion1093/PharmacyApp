@@ -18,7 +18,7 @@ namespace PharmacyApp.Repositories
             sqlCommand.Parameters.AddWithValue("@Name", product.Name);
 
             sqlConnection.Open();
-            return sqlCommand.ExecuteNonQuery();
+            return Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
 
         public void DeleteProduct(int id)

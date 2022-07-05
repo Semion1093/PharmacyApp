@@ -18,7 +18,7 @@ namespace PharmacyApp.Repositories
             sqlCommand.Parameters.AddWithValue("@PharmacyId", store.PharmacyId);
 
             sqlConnection.Open();
-            return sqlCommand.ExecuteNonQuery();
+            return Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
 
         public void DeleteStore(int id)

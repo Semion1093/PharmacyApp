@@ -180,7 +180,7 @@ while (!exitApp)
         };
 
         StoreRepository storeRepository = new();
-        var id = storeRepository.AddStore(store);
+        var id = StoreRepository.AddStore(store);
 
         Console.WriteLine();
         ConsoleEx.WriteLine($"{id}", ConsoleColor.Green);
@@ -272,7 +272,9 @@ while (!exitApp)
 
         foreach(var product in products)
         {
-            Console.WriteLine(product);
+            Console.WriteLine($" Наименование товара: {product.Name}, Количество: {product.Count}");
         }
+
+        Console.ReadLine();
     }
 }

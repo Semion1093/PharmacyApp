@@ -19,7 +19,7 @@ namespace PharmacyApp.Repositories
             sqlCommand.Parameters.AddWithValue("@Count", batch.Count);
 
             sqlConnection.Open();
-            return sqlCommand.ExecuteNonQuery();
+            return Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
 
         public void DeleteBatch(int id)

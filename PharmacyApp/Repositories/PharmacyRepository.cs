@@ -19,7 +19,7 @@ namespace PharmacyApp.Repositories
             sqlCommand.Parameters.AddWithValue("@Phone", pharmacy.Phone);
 
             sqlConnection.Open();
-            return sqlCommand.ExecuteNonQuery();
+            return Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
 
         public void DeletePharmacy(int id)
