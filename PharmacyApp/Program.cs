@@ -2,8 +2,11 @@
 using PharmacyApp.Models;
 using PharmacyApp.Repositories;
 
-
 bool exitApp = false;
+var productRepository = new ProductRepository();
+var pharmacyRepository = new PharmacyRepository(); 
+var storeRepository = new StoreRepository();
+var batchRepository = new BatchRepository();
 
 while (!exitApp)
 {
@@ -19,41 +22,41 @@ while (!exitApp)
         case "e":
             exitApp = true;
             break;
-        case "AddProduct":
+        case "Add Product":
         case "ap":
             AddProduct();
             break;
-        case "DeleteProduct":
+        case "Delete Product":
         case "dp":
             DeleteProduct();
             break;
-        case "AddPharmacy":
+        case "Add Pharmacy":
         case "aph":
             AddPharmacy();
             break;
-        case "DeletePharmacy":
+        case "Delete Pharmacy":
         case "dph":
             DeletePharmacy();
             break;
-        case "AddStore":
+        case "Add Store":
         case "as":
             AddStore();
             break;
-        case "DeleteStore":
+        case "Delete Store":
         case "ds":
             DeleteStore();
             break;
-        case "AddBatch":
+        case "Add Batch":
         case "ab":
             AddBatch();
             break;
-        case "DeleteBatch":
+        case "Delete Batch":
         case "db":
             DeleteBatch();
             break;
-        case "GetAllProductsByPharmacy":
+        case "Get Products":
         case "get":
-            GetProducts();
+            GetProductsByPharmacy();
             break;
         case "Help":
         case "h":
@@ -68,7 +71,7 @@ while (!exitApp)
             break;
     }
 
-    static void AddProduct()
+    void AddProduct()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -82,16 +85,15 @@ while (!exitApp)
             Name = Console.ReadLine().Trim()
         };
 
-        ProductRepository productRepository = new();
         var id = productRepository.AddProduct(product);
 
         Console.WriteLine();
-        ConsoleEx.WriteLine($"{id}", ConsoleColor.Green);
+        ConsoleEx.WriteLine($"Product Id = {id}", ConsoleColor.Green);
         Console.Write("Press ENTER to continue... ");
         Console.ReadLine();
     }
 
-    static void DeleteProduct()
+    void DeleteProduct()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -102,7 +104,6 @@ while (!exitApp)
         Console.Write(" >> Id: ");
         int id = Convert.ToInt32(Console.ReadLine().Trim());
 
-        ProductRepository productRepository = new();
         productRepository.DeleteProduct(id);
 
         Console.WriteLine();
@@ -111,7 +112,7 @@ while (!exitApp)
         Console.ReadLine();
     }
 
-    static void AddPharmacy()
+    void AddPharmacy()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -132,16 +133,15 @@ while (!exitApp)
             Phone = phone
         };
 
-        PharmacyRepository pharmacyRepository = new();
         var id = pharmacyRepository.AddPharmacy(pharmacy);
 
         Console.WriteLine();
-        ConsoleEx.WriteLine($"{id}", ConsoleColor.Green);
+        ConsoleEx.WriteLine($"Pharmacy Id = {id}", ConsoleColor.Green);
         Console.Write("Press ENTER to continue... ");
         Console.ReadLine();
     }
      
-    static void DeletePharmacy()
+    void DeletePharmacy()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -152,7 +152,6 @@ while (!exitApp)
         Console.Write(" >> Id: ");
         int id = Convert.ToInt32(Console.ReadLine().Trim());
 
-        PharmacyRepository pharmacyRepository = new();
         pharmacyRepository.DeletePharmacy(id);
 
         Console.WriteLine();
@@ -161,7 +160,7 @@ while (!exitApp)
         Console.ReadLine();
     }
 
-    static void AddStore()
+    void AddStore()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -179,16 +178,15 @@ while (!exitApp)
             PharmacyId = pharmacyId
         };
 
-        StoreRepository storeRepository = new();
-        var id = StoreRepository.AddStore(store);
+        var id = storeRepository.AddStore(store);
 
         Console.WriteLine();
-        ConsoleEx.WriteLine($"{id}", ConsoleColor.Green);
+        ConsoleEx.WriteLine($"Store Id = {id}", ConsoleColor.Green);
         Console.Write("Press ENTER to continue... ");
         Console.ReadLine();
     }
 
-    static void DeleteStore()
+    void DeleteStore()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -199,7 +197,6 @@ while (!exitApp)
         Console.Write(" >> Id: ");
         int id = Convert.ToInt32(Console.ReadLine().Trim());
 
-        StoreRepository storeRepository = new();
         storeRepository.DeleteStore(id);
 
         Console.WriteLine();
@@ -208,7 +205,7 @@ while (!exitApp)
         Console.ReadLine();
     }
 
-    static void AddBatch()
+    void AddBatch()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -229,16 +226,15 @@ while (!exitApp)
             Count = count
         };
 
-        BatchRepository batchRepository = new();
         var id = batchRepository.AddBatch(batch);
 
         Console.WriteLine();
-        ConsoleEx.WriteLine($"{id}", ConsoleColor.Green);
+        ConsoleEx.WriteLine($"Batch Id = {id}", ConsoleColor.Green);
         Console.Write("Press ENTER to continue... ");
         Console.ReadLine();
     }
 
-    static void DeleteBatch()
+    void DeleteBatch()
     {
         Console.Clear();
         MainMenu.MenuS();
@@ -249,7 +245,6 @@ while (!exitApp)
         Console.Write(" >> Id: ");
         int id = Convert.ToInt32(Console.ReadLine().Trim());
 
-        BatchRepository batchRepository = new();
         batchRepository.DeleteBatch(id);
 
         Console.WriteLine();
@@ -257,7 +252,7 @@ while (!exitApp)
         Console.ReadLine();
     }
 
-    static void GetProducts()
+    void GetProductsByPharmacy()
     {
         Console.Clear();
         ConsoleEx.WriteLine("".PadLeft(115, '='), ConsoleColor.DarkMagenta);
@@ -267,7 +262,6 @@ while (!exitApp)
         Console.Write(" >> Id: ");
         int id = Convert.ToInt32(Console.ReadLine().Trim());
 
-        ProductRepository productRepository = new();
         var products = productRepository.GetProductsByPharmacy(id);
 
         foreach(var product in products)
